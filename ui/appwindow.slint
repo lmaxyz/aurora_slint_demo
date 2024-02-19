@@ -1,0 +1,28 @@
+import { Button, VerticalBox } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    preferred-width: 720px;
+    preferred-height: 1280px;
+    // no-frame: true;
+    default-font-size: 32px;
+
+    in-out property<int> counter: 10;
+    callback request-increase-value();
+
+    VerticalBox {
+        Text {
+            text: "Counter: \{root.counter}";
+            font-size: 32px;
+        }
+        Button {
+            text: "Increase value";
+            clicked => {
+                root.request-increase-value();
+            }
+        }
+        Text {
+            text: "Hello from Rust";
+            font-size: 32px;
+        }
+    }
+}

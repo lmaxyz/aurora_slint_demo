@@ -1,0 +1,2 @@
+[env]
+SLINT_NO_QT="1"

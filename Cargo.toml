@@ -5,7 +5,7 @@ edition = "2021"
 build = "build.rs"
 
 [dependencies]
-slint = {version="1.4", default-features = false, features = ["std", "backend-winit-wayland", "renderer-winit-skia", "compat-1-2"]}
+slint = {version="1.4", default-features = false, features = ["std", "backend-winit-wayland", "renderer-winit-software", "compat-1-2"]}
 
 [build-dependencies]
 slint-build = "1.4"

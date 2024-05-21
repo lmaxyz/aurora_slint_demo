@@ -1,80 +1,19 @@
-import { Button, VerticalBox, HorizontalBox } from "std-widgets.slint";
+import { VerticalBox, HorizontalBox, Button } from "std-widgets.slint";
 
-component Circle inherits Rectangle {
-    width: 50px;
-    height: 50px;
-    border-radius: root.width / 2;
-}
-
-component Button inherits Rectangle {
-    in-out property text <=> txt.text;
-
-    callback clicked <=> touch.clicked;
-    out property <bool> pressed <=> touch.pressed;
-
-    border-radius: 10px;
-    border-width: 1px;
-    border-color: root.background.darker(25%);
-    background: touch.pressed ? #6b8282 : touch.has-hover ? #6c616c :  #456;
-    height: txt.preferred-height * 1.33;
-    min-width: txt.preferred-width + 20px;
-    txt := Text {
-        x: (parent.width - self.width)/2 + (touch.pressed ? 2px : 0);
-        y: (parent.height - self.height)/2 + (touch.pressed ? 1px : 0);
-        color: touch.pressed ? #fff : #eee;
-    }
-    touch := TouchArea { }
-}
 
 export component AppWindow inherits Window {
+    title: "Hello from slint";
+
     width: 720px;
     height: 1280px;
-
-    default-font-size: 32px;
-
-    callback exit <=> exit_btn.clicked;
-
-    states [
-        left-aligned when b1.pressed: {
-            circle1.x: 0px; circle1.y: 50px;
-            circle2.x: 0px; circle2.y: 0px;
-
-            in {
-                animate circle1.x, circle2.x { duration: 250ms; }
-                animate circle1.y {duration: 100ms;}
-            }
-            out {
-                animate circle1.x, circle2.x { duration: 500ms; }
-                animate circle1.y {duration: 300ms;}
-            }
-        }
-        right-aligned when !b1.pressed: {
-            circle1.x: 170px; circle1.y: 70px;
-            circle2.x: 170px; circle2.y: 00px;
-        }
-    ]
-
+    
     VerticalBox {
-        alignment: LayoutAlignment.space-between;
-
-        HorizontalBox {
-            b1 := Button {
-                text: "Press and hold to change state";
-            }
-        }
-        Rectangle {
-            background: root.background.darker(30%);
-            width: 350px;
-            height: 200px;
-
-            circle1 := Circle { y:0; background: green; x: 85px; }
-            circle2 := Circle { background: blue; x: 85px; y: 40px; }
-        }
-        HorizontalBox {
-            height: 150px;
-            exit_btn := Button {
-                text: "Exit";
-            }
+        Text {
+            text: "Hello from slint!";
+            vertical-alignment: TextVerticalAlignment.center;
+            horizontal-alignment: TextHorizontalAlignment.center;
+            
+            font-size: 18px + 16px * abs(sin(360deg * animation-tick() / 3s));
         }
     }
 }

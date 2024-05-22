@@ -17,5 +17,4 @@
 ## Подготовка к деплою
 
 * Установить [Aurora SDK](https://developer.auroraos.ru/doc/software_development/sdk/setup)
-* Запустить эмулятор устройства
 * Указать переменные окружения в файле `.env` (пример взять из файла `.env.example`)

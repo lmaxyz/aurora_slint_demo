@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=com.lmaxyz.SlintAuroraDemo
+Exec=/usr/bin/com.lmaxyz.SlintAuroraDemo
+Name=Slint App Demo
+Name[ru]=Пример приложения Slint
+
+[X-Application]
+OrganizationName=com.lmaxyz
+ApplicationName=SlintAuroraDemo

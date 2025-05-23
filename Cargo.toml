@@ -1,14 +1,41 @@
 [package]
-name = "simple_slint_aurora"
+name = "slint_aurora_demo"
 version = "0.1.0"
 edition = "2021"
 build = "build.rs"
 
 [dependencies]
-slint = {version="1.7.2", default-features = false, features = ["std", "backend-winit-wayland", "renderer-winit-femtovg", "compat-1-2"]}
+slint = { version = "1.11", default-features = false, features = [
+    "std",
+    "backend-winit-wayland",
+    "renderer-winit-femtovg",
+    "compat-1-2",
+] }
 
 [build-dependencies]
-slint-build = "1.7.2"
+slint-build = "1.11"
+
+[profile.release]
+opt-level = "s"
+debug = false
+lto = true
+strip = true
+
+[package.metadata.generate-rpm]
+name = "com.lmaxyz.SlintAuroraDemo"
+license = "Apache-2.0"
+summary = "Slint Aurora Example"
+release = "1"
+url = "https://github.com/lmaxyz/aurora_slint_demo"
+assets = [
+    { source = "target/armv7-unknown-linux-gnueabihf/release/lets_habr", dest = "/usr/bin/com.lmaxyz.LetsHabr", mode = "755" },
+    { source = "rpm/com.lmaxyz.SlintAuroraDemo.desktop", dest = "/usr/share/applications/com.lmaxyz.SlintAuroraDemo.desktop", mode = "644" },
+    { source = "rpm/icons/86x86/com.lmaxyz.SlintAuroraDemo.png", dest = "/usr/share/icons/hicolor/86x86/apps/com.lmaxyz.SlintAuroraDemo.png", mode = "644" },
+    { source = "rpm/icons/108x108/com.lmaxyz.SlintAuroraDemo.png", dest = "/usr/share/icons/hicolor/108x108/apps/com.lmaxyz.SlintAuroraDemo.png", mode = "644" },
+    { source = "rpm/icons/128x128/com.lmaxyz.SlintAuroraDemo.png", dest = "/usr/share/icons/hicolor/128x128/apps/com.lmaxyz.SlintAuroraDemo.png", mode = "644" },
+    { source = "rpm/icons/172x172/com.lmaxyz.SlintAuroraDemo.png", dest = "/usr/share/icons/hicolor/172x172/apps/com.lmaxyz.SlintAuroraDemo.png", mode = "644" },
+]
 
 [patch.crates-io]
 winit = {git="https://github.com/lmaxyz/winit", branch="aurora"}
+glutin = { git = "https://github.com/lmaxyz/glutin", branch = "aurora_device_fix" }
